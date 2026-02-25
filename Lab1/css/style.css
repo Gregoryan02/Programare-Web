@@ -1,0 +1,22 @@
+*{
+    box-sizing: border-box;
+    margin:auto;
+    padding:auto;
+    font-family: 'Times New Roman', Times, serif;
+}
+:root{
+    --primary-color: #4CAF50;
+    --secondary-color: #f44336;
+    --background-color: black;
+    --text-color:white;
+}
+img{
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px white;
+}
+aside.personal-info{
+    width: 40%;
+   float: right;
+}
