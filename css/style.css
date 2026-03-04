@@ -20,3 +20,7 @@ aside.personal-info{
     width: 40%;
    float: right;
 }
+body.dark-mode{
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+}
