@@ -16,6 +16,7 @@ form.addEventListener("submit", function(event){
     }
 });
 Personalize_Greeting();
+toggleDarkMode();
 
 
 function idExtractor(elementId) {
@@ -33,4 +34,9 @@ function Personalize_Greeting(){
         greeting.textContent = "Good evening, commander!";
     }
 }
-
+function toggleDarkMode() {
+    document.getElementById("dark-mode").addEventListener("click", function() {
+       document.body.classList.toggle("dark-mode");
+       console.log("Dark mode toggled");
+    });
+};
