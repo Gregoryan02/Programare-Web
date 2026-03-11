@@ -17,6 +17,7 @@ form.addEventListener("submit", function(event){
 });
 Personalize_Greeting();
 toggleDarkMode();
+toogleVisibility();
 
 
 function idExtractor(elementId) {
@@ -37,6 +38,15 @@ function Personalize_Greeting(){
 function toggleDarkMode() {
     document.getElementById("dark-mode").addEventListener("click", function() {
        document.body.classList.toggle("dark-mode");
-       console.log("Dark mode toggled");
     });
 };
+function toogleVisibility() {
+    document.querySelectorAll("main h2").forEach(function(h2) {
+        const originalText = h2.textContent;
+        h2.addEventListener("click", function() {
+            const content = this.nextElementSibling;
+            content.classList.toggle("hidden");
+            content.classList.contains("hidden") ? h2.textContent = "\u25BE" + originalText : h2.textContent = "\u25B4" + originalText;
+        });
+    });
+}
