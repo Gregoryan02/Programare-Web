@@ -1,67 +1,13 @@
-<!DOCTYPE html>
-<HTML>
-<head>
-    <meta charset = "UTF-8">
-    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-    <title>Lab 1</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-
-    <header>
-        <p>BC Commander, Terran Military Aeronaval Academy</p>
-        <p id="greeting"></p>
-    </header>
-    <nav id="meniu">
-        <li id="dark-mode">Dark Mode</li>
-    </nav>
-    <main>
-        <script>
-            alert("Good day, commander!");
-        </script>
-        <section id="about">
-            <p>A picture taken at test</p>
-            <img src="images/Battlecruiser_SC2_Head1.webp" alt="BC Commander" loading="lazy">
-        </section>
-        <h2>Education</h2>
-        <section id="education">
-            <ol type="I">
-                <li>Military Aeronaval Academy</li>
-                <li>Advanced Combat Training</li>
-                <li>Interspace Jump Training</li>
-            </ol>
-        </section>
-        <h2>Hobbies</h2>
-        <aside id = "hobbies">
-            <ul title="Hobby-uri">
-                <li>Light zergs on fire</li>
-                <li>Teleporting using Interspace Jump</li>
-                <li>Playing chess with the fleet's AI</li>
-                <li>Watching Uthermal Youtube videos</li>
-            </ul>
-        </aside>
-        <footer>
-            
-
-            </script>
-            
-            <h2>Contact</h2>
-            <form>
-                <label for="name">Name:</label>
-                <input type = "text" id = "name" name="Name">
-                <br>
-                <label for="email">Email:</label>
-                <input type = "text" id = "email" name="Email">
-                <br>
-                <label for="message">Message:</label>
-                <textarea id = "message" name="Message" rows = "4" for="id_input"></textarea>
-                <br>
-                <input type = "submit" value="Submit" onclick="submitForm()">
-            </form>
-            <p id="form-feedback"></p>
-            <p>Copyright &copy; 2024 Terran History</p>
-        </footer>
-    </main>
-    <script src="js/contact_form.js"></script>
-</body>
-</HTML>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>web</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
