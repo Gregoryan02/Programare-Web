@@ -3,6 +3,7 @@ import { useState } from 'react';
 import QuickNote from './QuickNote';
 import TodoList from './TodoList';
 import ContactForm from './ContactForm';
+import Clock from './Clock';
 
 function App() {
   const projects = [
@@ -16,7 +17,7 @@ function App() {
 
   return (
     <div>
-
+      <Clock />
       {projects.map((project, index)=>{
         return <Card key={index} title={project.title} description={project.description} />;
       })}
