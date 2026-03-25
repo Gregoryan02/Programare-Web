@@ -1,27 +1,19 @@
-import Card from './Card';
+
 import { useState } from 'react';
 import QuickNote from './QuickNote';
 import TodoList from './TodoList';
 import ContactForm from './ContactForm';
 import Clock from './Clock';
+import ProjectList from './ProjectList';
+
 
 function App() {
-  const projects = [
-    { title: "Proiect 1", description: "Pagina personala cu HTML si CSS" },
-    { title: "Proiect 2", description: "Pagina interactiva cu JavaScript" },
-    { title: "Proiect 3", description: "Dashboard cu React" },
-    { title: "Proiect 4", description: "Aplicatie mobila cu React Native" },
-    { title: "Proiect 5", description: "Backend API cu Node.js si Express" },
-  ];
   const [count, setCount] = useState(0);
 
   return (
     <div>
       <Clock />
-      {projects.map((project, index)=>{
-        return <Card key={index} title={project.title} description={project.description} />;
-      })}
-
+      <ProjectList />
       <QuickNote />
       <TodoList />
 
