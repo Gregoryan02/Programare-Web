@@ -1,5 +1,6 @@
 import Card from './Card';
 import { useState } from 'react';
+import QuickNote from './QuickNote';
 
 function App() {
   const projects = [
@@ -17,6 +18,8 @@ function App() {
       {projects.map((project, index)=>{
         return <Card key={index} title={project.title} description={project.description} />;
       })}
+
+      <QuickNote />
 
       <p>Ai apasat de {count} ori</p>
       
