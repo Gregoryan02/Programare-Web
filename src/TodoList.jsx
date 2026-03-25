@@ -9,6 +9,9 @@ function TodoList() {
         setTodos([...todos, input]); //Creeaza array NOU cu tot ce era + inputul
         setInput(''); //Reseteaza inputul 
     }
+    function handleDelete(index) {
+        setTodos(todos.filter((_,i) => i !== index)); //Creeaza array NOU fara elementul de sters
+    }
     return (
         <div>
             <h3>Todo List</h3>
@@ -20,7 +23,10 @@ function TodoList() {
             <button onClick={handleAdd}>Adauga</button>
 
             <ul>
-                {todos.map(function(todos,index){return <li key={index}>{todos}</li>})}
+                {todos.map(function(todos,index){return <li key={index}>
+                    {todos}
+                    <button onClick={() => handleDelete(index)}>Sterge</button>
+                    </li>})}
             </ul>
         </div>
     )}
