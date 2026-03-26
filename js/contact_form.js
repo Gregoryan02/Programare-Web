@@ -1,4 +1,5 @@
 const form = document.querySelector("form");
+const themeButton = document.getElementById("themeToggle");
 form.addEventListener("submit", function(event){
      event.preventDefault();
     if(!idExtractor("name").length >= 2){
@@ -14,6 +15,13 @@ form.addEventListener("submit", function(event){
         document.getElementById("form-feedback").textContent = "Form submitted successfully, commander!";
         document.getElementById("form-feedback").style.color = "green";
     }
+});
+themeButton.addEventListener("click", () =>{
+    document.body.classList.toggle("light-mode")
+    if(document.body.classList.contains("light-mode"))
+        themeButton.textContent = "Dark Mode";
+    else
+        themeButton.textContent = "Light Mode";
 });
 Personalize_Greeting();
 

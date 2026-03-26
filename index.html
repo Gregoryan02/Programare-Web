@@ -5,6 +5,7 @@
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
     <title>Lab 1</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -13,7 +14,9 @@
         <p id="greeting"></p>
     </header>
     <nav id="meniu">
-        <li>Dark Mode</li>
+        <ul>
+            <li id = "themeToggle">Dark Mode</li>
+        </ul>
     </nav>
     <main>
         <script>
@@ -45,13 +48,13 @@
             <p>Copyright &copy; 2024 Terran History</p>
             <form>
                 <label for="name">Name:</label>
-                <input type = "text" id = "name" name="Name">
+                <input type = "text" id = "name" name="name">
                 <br>
                 <label for="email">Email:</label>
-                <input type = "text" id = "email" name="Email">
+                <input type = "text" id = "email" name="email">
                 <br>
                 <label for="message">Message:</label>
-                <textarea id = "message" name="Message" rows = "4" for="id_input"></textarea>
+                <textarea id = "message" name="message" rows = "4" for="id_input"></textarea>
                 <br>
                 <input type = "submit" value="Submit" onclick="submitForm()">
             </form>
