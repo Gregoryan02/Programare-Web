@@ -24,7 +24,18 @@ themeButton.addEventListener("click", () =>{
         themeButton.textContent = "Light Mode";
 });
 Personalize_Greeting();
+toggleVisibility();
 
+function toggleVisibility(){
+   const headers =  document.querySelectorAll('main h2');
+   
+   headers.forEach((h2)=>{
+    h2.addEventListener("click",()=>{
+        document.getElementById(h2.textContent.toLowerCase()).classList.toggle("hidden");
+    })
+   })
+   
+}
 
 function idExtractor(elementId) {
     return form.elements.namedItem(elementId).value;
