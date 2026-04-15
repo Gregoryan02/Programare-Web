@@ -5,9 +5,14 @@ function ProjectList() {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
     const[error, setError] = useState(null);
+    const [search, setSearch] = useState('');
+
+    function SearchProject(){
+        return projects.filter(p => p.title.toLowerCase().includes(search.toLowerCase()));
+    }
 
     useEffect(() => {
-        fetch('/data/gresit.json')
+        fetch('/data/projects.json')
             .then(response => response.json())
             .then(data => {
                 setProjects(data.projects);
@@ -25,9 +30,19 @@ function ProjectList() {
     return(
         <div>
             <h3>Proiecte</h3>
-            {projects.map(project => (
+            {SearchProject().map(project => (
                 <Card key={project.id} title={project.title} description={project.tech} />
             ))}
+            <h3>Search</h3>
+            <input
+            value = {search}
+            onChange = {(e) => setSearch(e.target.value)}
+            />
+            <ol>
+            <li> Total proiecte: {projects.length}</li>
+            <li> Finalizate: {projects.filter(p => p.done).length}</li>
+            <li> In Lucru: {projects.filter(p => !p.done).length}</li>
+            </ol>
         </div>
 
     );
