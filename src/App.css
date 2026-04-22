@@ -32,6 +32,20 @@ nav a{
 nav a:hover {background: #34495E;}
 nav a.active {background: #FF7733;}
 
+nav li{
+  display:inline-block;
+  color:white;
+  text-decoration: none;
+  padding: 1px 10px;
+  border-radius: 1px;
+}
+
+nav.footer{
+  position: absolute;
+  width: 100%;
+  bottom: 10px;
+}
+
 .hero {
   position: relative;
 
