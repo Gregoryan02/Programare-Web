@@ -11,8 +11,18 @@ const projects = [
 app.get('/', function(req, res) {
     res.json({ message: 'Serverul functioneaza!' });
 });
-app.get('/api/projects', function(req,res){
-    res.json(projects);
+app.get('/api/projects/:id', function(req,res){
+    let project = projects.find(p => p.id == parseInt(req.params.id))
+    if(project != null)
+        res.json(project)
+    else
+        res.status(404).json({error: 'Not found'})
+});
+app.get('/api/stats',function(req,res){
+    let total = projects.length;
+    let finalizate = projects.filter(p => p.done == true).length;
+    let inLucru = total-finalizate;
+    res.json({nrProiecte:total, proiecteFinalizate:finalizate,proiecteInLucru:inLucru});
 });
 // Porneste serverul
 app.listen(PORT, function() {
