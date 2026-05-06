@@ -1,5 +1,17 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017//dashboard')
+    .then(function(){
+        console.log('Conectat la MongoDB!');
+    })
+    .catch(function(err){
+        console.error('Eroare conectare MongoDB',err);
+    });
+
+
+
+
 const PORT = 3000;
 const projects = [
     { id: 1, title: "Pagina Personala", tech: "HTML, CSS", done: true },
@@ -17,22 +29,22 @@ app.get('/api/projects', function(req,res){
 })
 
 app.get('/api/projects/:id', function(req,res){
-    let project = projects.find(p => p.id == parseInt(req.params.id))
+    let project = projects.find(p => p.id == parseInt(req.params.id));
     if(project != null)
-        res.json(project)
+        res.json(project);
     else
-        res.status(404).json({error: 'Not found'})
+        res.status(404).json({error: 'Not found'});
 });
 
 app.delete('/api/projects/:id', function(req,res){
-    let index = projects.findIndex(p => p.id == parseInt(req.params.id))
+    let index = projects.findIndex(p => p.id == parseInt(req.params.id));
     if(index === -1)
-        res.status(404).json({error: 'Not found'})
+        res.status(404).json({error: 'Not found'});
     else{
-        projects.splice(index, 1)
-        res.json({message: 'Deleted'})
+        projects.splice(index, 1);
+        res.json({message: 'Deleted'});
     }
-})
+});
 
 app.get('/api/stats',function(req,res){
     let total = projects.length;
