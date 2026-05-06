@@ -25,23 +25,22 @@ app.get('/api/projects', async function(req,res){
     }
 });
 
-/*app.get('/api/projects/:id', function(req,res){
-    let project = projects.find(p => p.id == parseInt(req.params.id));
+app.get('/api/projects/:id',async function(req,res){
+    const project = await Project.findById(req.params.id);
     if(project != null)
         res.json(project);
     else
         res.status(404).json({error: 'Not found'});
-});*/
+});
 
-/*app.delete('/api/projects/:id', function(req,res){
-    let index = projects.findIndex(p => p.id == parseInt(req.params.id));
-    if(index === -1)
+app.delete('/api/projects/:id',async function(req,res){
+    const project = await Project.findByIdAndDelete(req.params.id);
+    if(!project)
         res.status(404).json({error: 'Not found'});
     else{
-        projects.splice(index, 1);
         res.json({message: 'Deleted'});
     }
-});*/
+});
 
 /*app.get('/api/stats',function(req,res){
     let total = projects.length;
@@ -50,15 +49,18 @@ app.get('/api/projects', async function(req,res){
     res.json({nrProiecte:total, proiecteFinalizate:finalizate,proiecteInLucru:inLucru});
 });*/
 
-app.post('/api/projects',function(req, res){
-    const newProject = {
-        id: projects.length+1,
+app.post('/api/projects',async function(req, res){
+    try{
+    const newProject = new Project({
         title: req.body.title,
         tech: req.body.tech,
         done: req.body.done || false,
-    };
-    projects.push(newProject);
-    res.status(201).json(newProject);
+    });
+    const saved = await newProject.save();
+    res.status(201).json(saved);
+    } catch(err){
+        res.status(400).json({error: err.message});
+    }
 });
 // Porneste serverul
 app.listen(PORT, function() {
