@@ -24,6 +24,16 @@ app.get('/api/projects/:id', function(req,res){
         res.status(404).json({error: 'Not found'})
 });
 
+app.delete('/api/projects/:id', function(req,res){
+    let index = projects.findIndex(p => p.id == parseInt(req.params.id))
+    if(index === -1)
+        res.status(404).json({error: 'Not found'})
+    else{
+        projects.splice(index, 1)
+        res.json({message: 'Deleted'})
+    }
+})
+
 app.get('/api/stats',function(req,res){
     let total = projects.length;
     let finalizate = projects.filter(p => p.done == true).length;
