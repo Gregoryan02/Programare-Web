@@ -45,6 +45,13 @@ function ProjectList() {
             console.error('Eroare: ', err);
         }
     }
+    async function handleDelete(id){
+            const respone = await fetch('http://localhost:3000/api/projects/'+id,{
+                method: 'DELETE'
+            });
+            setProjects(projects.filter(p => p._id !== id));
+    }
+
 
     if(loading) return <p>Loading...</p>;
     if(error) return <p>{error}</p>;
@@ -52,7 +59,10 @@ function ProjectList() {
         <div>
             <h3>Proiecte</h3>
             {SearchProject().map(project => (
+                <div>
                 <Card key={project.id} title={project.title} description={project.tech} />
+                <button onClick={() => handleDelete(project._id)}>Sterge</button>
+                </div>
             ))}
             <h3>Adauga un proiect</h3>
             <h5>Title</h5>
