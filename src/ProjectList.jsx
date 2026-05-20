@@ -8,6 +8,9 @@ function ProjectList() {
     const [search, setSearch] = useState('');
     const [title,setTitle] = useState('');
     const [tech,setTech] = useState('');
+    const [editingId, setEditingId] = useState(null);
+    const [editingTitle, setEditingTitle] = useState('');
+    const [editingTech, setEditingTech] = useState('');
 
 
 
@@ -64,7 +67,50 @@ function ProjectList() {
             console.error('Eroare la actualizarea proiectului:', err);
         }
     }
+    async function handleEdit(id){
+        try{
+            const response = await fetch('http://localhost:3000/api/projects/'+id,{
+                method:'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({title: editingTitle, tech: editingTech})
+            });
+            const updatedProject = await response.json();
+            setProjects(projects.map(p => p._id === id ? updatedProject : p));
+            setEditingId(null);
+            setEditingTitle('');
+            setEditingTech('');
+        } catch (err) {
+            console.error('Eroare la actualizarea proiectului:', err);
+        }
+    }
+    function EditForm(editingId,title,tech,project){
+        if(editingId !== null)
+            return (
+                <div>
+                    <h5>Title</h5>
+                    <input value={editingTitle} onChange={(e) => setEditingTitle(e.target.value)} />
+                    <h5>Tech</h5>
+                    <input value={editingTech} onChange={(e) => setEditingTech(e.target.value)} />
+                    <p></p>
+                    <button onClick={() => handleEdit(editingId)}>Save</button>
+                    <button onClick={() => setEditingId(null)}>Cancel</button>
+                </div>
+            );
+        else
+            return(
+                    <div>
+                    <Card key={project.id} title={project.title} description={project.tech} />
+                    <button onClick={() => handleDelete(project._id)}>Sterge</button>
+                    <button onClick={() => handleToogle(project._id, project.done)}>{project.done?'\u{2610}':'\u{2611}'}</button>
+                    <button onClick={() => {
+                        setEditingId(project._id);
+                        setEditingTitle(project.title);
+                        setEditingTech(project.tech);
+                    }}>Edit</button>
+                    </div>
+                );
 
+    }
 
     if(loading) return <p>Loading...</p>;
     if(error) return <p>{error}</p>;
@@ -72,11 +118,7 @@ function ProjectList() {
         <div>
             <h3>Proiecte</h3>
             {SearchProject().map(project => (
-                <div>
-                <Card key={project.id} title={project.title} description={project.tech} />
-                <button onClick={() => handleDelete(project._id)}>Sterge</button>
-                <button onClick={() => handleToogle(project._id, project.done)}>{project.done?'\u{2610}':'\u{2611}'}</button>
-                </div>
+                EditForm(editingId, editingTitle, editingTech, project)
             ))}
             <h3>Adauga un proiect</h3>
             <h5>Title</h5>
@@ -89,6 +131,7 @@ function ProjectList() {
                 value={tech}
                 onChange={(e) => {setTech(e.target.value)}}
             />
+            <p></p>
             <button onClick={handleSubmit}>Submit</button>
             <h3>Search</h3>
             <input
@@ -100,7 +143,6 @@ function ProjectList() {
             <li> Finalizate: {projects.filter(p => p.done).length}</li>
             <li> In Lucru: {projects.filter(p => !p.done).length}</li>
             </ol>
-            <input></input>
         </div>
 
     );
