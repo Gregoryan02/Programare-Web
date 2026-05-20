@@ -44,12 +44,15 @@ app.delete('/api/projects/:id',async function(req,res){
     }
 });
 
-/*app.get('/api/stats',function(req,res){
-    let total = projects.length;
-    let finalizate = projects.filter(p => p.done == true).length;
-    let inLucru = total-finalizate;
-    res.json({nrProiecte:total, proiecteFinalizate:finalizate,proiecteInLucru:inLucru});
-});*/
+app.get('/api/stats',async function(req,res){
+    try{
+        const total = await Project.countDocuments();
+        const done = await Project.countDocuments({done:true});
+        res.json({total: total, done: done, inProgress: total - done});
+    }catch(err){
+        res.status(500).json({error: 'Eroare server: ' + err});
+    }
+});
 
 app.post('/api/projects',async function(req, res){
     try{
