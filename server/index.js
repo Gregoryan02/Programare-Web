@@ -68,3 +68,16 @@ app.post('/api/projects',async function(req, res){
 app.listen(PORT, function() {
     console.log('Server pornit pe http://localhost:' + PORT);
 });
+app.put('/api/projects/:id',async function(req,res){
+    try{
+        const updated = await Project.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            {new:true}
+        );
+        if(!updated) return res.status(404).json({error: 'Not found'});
+        res.json(updated);
+    } catch(err){
+        res.status(400).json({error: err.message});
+    }
+});

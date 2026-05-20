@@ -51,6 +51,19 @@ function ProjectList() {
             });
             setProjects(projects.filter(p => p._id !== id));
     }
+    async function handleToogle(id,currentDone){
+        try{
+            const response = await fetch('http://localhost:3000/api/projects/'+id,{
+                method:'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({done:!currentDone})
+            });
+            const UpdateProject = await response.json();
+            setProjects(projects.map(p => p._id === id ? UpdateProject : p));
+        } catch (err) {
+            console.error('Eroare la actualizarea proiectului:', err);
+        }
+    }
 
 
     if(loading) return <p>Loading...</p>;
@@ -62,6 +75,7 @@ function ProjectList() {
                 <div>
                 <Card key={project.id} title={project.title} description={project.tech} />
                 <button onClick={() => handleDelete(project._id)}>Sterge</button>
+                <button onClick={() => handleToogle(project._id, project.done)}>{project.done?'\u{2610}':'\u{2611}'}</button>
                 </div>
             ))}
             <h3>Adauga un proiect</h3>
