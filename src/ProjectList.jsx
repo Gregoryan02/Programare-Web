@@ -13,7 +13,6 @@ function ProjectList() {
     const [editingTech, setEditingTech] = useState('');
 
 
-
     function SearchProject(){
         return projects.filter(p => p.title.toLowerCase().includes(search.toLowerCase()));
     }
@@ -83,42 +82,49 @@ function ProjectList() {
             console.error('Eroare la actualizarea proiectului:', err);
         }
     }
-    function EditForm(editingId,title,tech,project){
-        if(editingId !== null)
+    // Render each project: show edit form only for the project with id === editingId
+    function renderProject(project){
+        if(editingId === project._id){
             return (
-                <div>
+                <div key={project._id}>
                     <h5>Title</h5>
                     <input value={editingTitle} onChange={(e) => setEditingTitle(e.target.value)} />
                     <h5>Tech</h5>
                     <input value={editingTech} onChange={(e) => setEditingTech(e.target.value)} />
                     <p></p>
-                    <button onClick={() => handleEdit(editingId)}>Save</button>
-                    <button onClick={() => setEditingId(null)}>Cancel</button>
+                    <button onClick={() => handleEdit(project._id)}>Save</button>
+                    <button onClick={() => {
+                        setEditingId(null);
+                        setEditingTitle('');
+                        setEditingTech('');
+                    }}>Cancel</button>
                 </div>
             );
-        else
-            return(
-                    <div>
-                    <Card key={project.id} title={project.title} description={project.tech} />
-                    <button onClick={() => handleDelete(project._id)}>Sterge</button>
-                    <button onClick={() => handleToogle(project._id, project.done)}>{project.done?'\u{2610}':'\u{2611}'}</button>
-                    <button onClick={() => {
-                        setEditingId(project._id);
-                        setEditingTitle(project.title);
-                        setEditingTech(project.tech);
-                    }}>Edit</button>
-                    </div>
-                );
+        }
 
+        return (
+            <div key={project._id}>
+                <Card title={project.title} description={project.tech} />
+                <button onClick={() => handleDelete(project._id)}>Sterge</button>
+                <button onClick={() => handleToogle(project._id, project.done)}>{project.done? '\u{2610}' : '\u{2611}'}</button>
+                <button onClick={() => {
+                    setEditingId(project._id);
+                    setEditingTitle(project.title);
+                    setEditingTech(project.tech);
+                }}>Edit</button>
+            </div>
+        );
     }
+
+    const visibleProjects = editingId ? projects.filter(p => p._id === editingId) : SearchProject();
 
     if(loading) return <p>Loading...</p>;
     if(error) return <p>{error}</p>;
     return(
         <div>
             <h3>Proiecte</h3>
-            {SearchProject().map(project => (
-                EditForm(editingId, editingTitle, editingTech, project)
+            {visibleProjects.map(project => (
+                renderProject(project)
             ))}
             <h3>Adauga un proiect</h3>
             <h5>Title</h5>
