@@ -1,9 +1,9 @@
 function Card(props) {
     return (
-    <div>
-        <h3>{props.title}</h3>
-        <p>{props.description}</p>
-    </div>
+        <div>
+            <h3 style={{ marginTop: 0, color: 'var(--accent)' }}>{props.title}</h3>
+            <p style={{ fontSize: '15px', color: 'var(--text)' }}>{props.description}</p>
+        </div>
     );
 }
 export default Card;

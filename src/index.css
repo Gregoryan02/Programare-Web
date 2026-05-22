@@ -1,22 +1,23 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --text: #5a525f;
+  --text-h: #1a1625;
+  --bg: #fafaf9;
+  --border: #e8e5ed;
+  --code-bg: #f4f1f8;
+  --accent: #a855f7;
+  --accent-bg: rgba(168, 85, 247, 0.08);
+  --accent-border: rgba(168, 85, 247, 0.3);
+  --card-bg: #ffffff;
+  --social-bg: rgba(244, 243, 236, 0.6);
+  --shadow: rgba(0, 0, 0, 0.06) 0 10px 25px -5px, rgba(0, 0, 0, 0.03) 0 4px 6px -2px;
+  --shadow-lg: rgba(0, 0, 0, 0.1) 0 20px 40px -10px;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --sans: system-ui, 'Segoe UI', Roboto, -apple-system, sans-serif;
+  --heading: system-ui, 'Segoe UI', Roboto, -apple-system, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
+  font: 18px/150% var(--sans);
+  letter-spacing: 0.16px;
   color-scheme: light dark;
   color: var(--text);
   background: var(--bg);
@@ -32,17 +33,18 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
+    --text: #a8a1b0;
+    --text-h: #f5f3f7;
+    --bg: #1a1625;
+    --border: #302b3a;
+    --code-bg: #25202f;
     --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+    --accent-bg: rgba(192, 132, 252, 0.12);
+    --accent-border: rgba(192, 132, 252, 0.4);
+    --card-bg: #242033;
+    --social-bg: rgba(80, 70, 100, 0.4);
+    --shadow: rgba(0, 0, 0, 0.3) 0 10px 25px -5px, rgba(0, 0, 0, 0.15) 0 4px 6px -2px;
+    --shadow-lg: rgba(0, 0, 0, 0.5) 0 20px 40px -10px;
   }
 
   #social .button-icon {
@@ -67,29 +69,39 @@ body {
 }
 
 h1,
-h2 {
+h2,
+h3 {
   font-family: var(--heading);
-  font-weight: 500;
   color: var(--text-h);
 }
 
 h1 {
   font-size: 56px;
+  font-weight: 700;
   letter-spacing: -1.68px;
-  margin: 32px 0;
+  margin: 40px 0 24px;
   @media (max-width: 1024px) {
     font-size: 36px;
-    margin: 20px 0;
+    margin: 24px 0 16px;
   }
 }
+
 h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: -0.28px;
+  margin: 32px 0 16px;
   @media (max-width: 1024px) {
-    font-size: 20px;
+    font-size: 22px;
+    margin: 24px 0 12px;
   }
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 16px 0 8px;
 }
 p {
   margin: 0;
